@@ -55,7 +55,6 @@ export class AuthService {
                 this.isUserLoggedIn = true;
                 this.userDetails = value.user;
                 this.userService.createUser(this.userDetails);
-                 console.log(this.userDetails.email);
                 const returnUrl = this.aRoute.snapshot.queryParamMap.get("returnUrl");
                 this.router.navigate([returnUrl || "/products"]);
             }).catch(err => {
