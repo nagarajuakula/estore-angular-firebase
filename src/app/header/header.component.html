@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" 
+      data-target="#navbarTogglerDemo03" 
+      aria-controls="navbarTogglerDemo03" aria-expanded="false" 
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      </button>
+      <!-- <div class="logo">
+        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+            <div class="logo-image-small">
+              <img src="./assets/img/logo-small.png">
+            </div>
+          </a>
+      </div> -->
+      <a class="navbar-brand" href="#">E-Store</a>
+  
+      <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
+        <form>
+            <div class="input-group no-border">
+              <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Search not yet implemented">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <i class="nc-icon nc-zoom-split"></i>
+                </div>
+              </div>
+            </div>
+        </form>
+        <ul class="navbar-nav mt-2 mt-lg-0 ">
+          <li class="nav-item" *ngIf="authService.isUserLoggedIn">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Profile">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                User Profile
+              </button>
+              <button mat-menu-item (click)="logout()">
+                Logout
+              </button>
+            </mat-menu>   
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link"
+             routerLink="/" routerLinkActive="active"
+             *ngIf="!authService.isUserLoggedIn">Login<span class="sr-only">(current)</span></a>
+             <!-- <a class="nav-link"
+             (click)="logout()"
+             style="cursor: pointer;"
+             *ngIf="authService.isUserLoggedIn">Logout<span class="sr-only">(current)</span></a> -->
+          </li>
+          <li class="nav-item">
+            <div>
+            <a class="nav-link"
+             routerLink="/cart" routerLinkActive="active">
+             <i class="fa fa-shopping-cart">
+              <span class="mt-2">
+                {{ cartService.items.length }}
+                </span
+              >
+            </i></a>
+          </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+             routerLink="/products/edit-product/new" routerLinkActive="active">Add Product</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

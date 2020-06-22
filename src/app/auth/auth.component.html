@@ -1,0 +1,57 @@
+<div class="container mt--8 pb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-7">
+            <div *ngIf="authService.loginMessage">{{ authService.loginMessage }}</div>
+            <div class="card bg-secondary shadow border-0">
+                <div class="card-body px-lg-5 py-lg-5">
+                    <form #authForm="ngForm" (ngSubmit)="authenticate(authForm)" role="form">
+                        <div class="form-group mb-3">
+                            <div class="input-group input-group-alternative">
+                                <!-- <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                  </div> -->
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Email"
+                                    ngModel #email="ngModel" email required>
+                            </div>
+                            <p style="color:red;" *ngIf="email.touched && !email.valid">
+                                <span *ngIf="email.errors.required">Please Enter your Email</span>
+                                <span *ngIf="email.errors.email">Please Enter a valid Email</span>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-alternative">
+                                <!-- <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                  </div> -->
+                                <input type="password" id="password" class="form-control" name="password"
+                                    placeholder="Password" ngModel #pwd="ngModel" required minlength="6">
+                            </div>
+                            <p  style="color:red;" *ngIf="pwd.touched && !pwd.valid">
+                                <span *ngIf="pwd.errors.required">Please Enter your Password</span>
+                                <span *ngIf="pwd.errors.minlength">Your password should be minimum length of 6
+                                    characters</span>
+                            </p>
+                        </div>
+                        <!-- <div class="custom-control custom-control-alternative custom-checkbox">
+                            <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
+                            <label class="custom-control-label" for=" customCheckLogin">
+                                <span class="text-muted">Remember me</span>
+                            </label>
+                        </div> -->
+                        <div class="text-center">
+                            <button class="btn btn-primary" type="submit" [disabled]="!authForm.valid">Login</button>
+                        </div>
+                    </form>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <a href="javascript:void(0)" class="text-light"><small>Forgot password?</small></a>
+                        </div>
+                        <div class="col-6 text-right">
+                            <a href="javascript:void(0)" class="text-light"><small>Create new account</small></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="col-xl-12">
+    <h2 style="text-align:center" class="mat-title"> {{ editMode ? 'Edit Product Details' : 'Add Product' }}</h2>
+    <form #productForm="ngForm" (ngSubmit)="addOrEditProduct(productForm)">
+        <div class="form-group">
+            <label for="category">Category</label>&nbsp;
+            <select id="category" name="category" #category [(ngModel)]="product.category" required>
+                <option value="default" selected>Select Category</option>
+                <option *ngFor="let category of productService.categories" [ngValue]="category">{{ category }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="title">Product Name</label>
+            <input type="text" class="form-control" id="title" name="title" 
+            [(ngModel)]="product.title" 
+            required>
+            <input type="hidden" name="id" [(ngModel)]="product.id">
+        </div>
+        <div class="form-group" *ngIf="product.category === 'Books'">
+            <label for="author">Product Author</label>
+            <input type="text" class="form-control" id="author" name="author"
+            [(ngModel)]="product.author"
+            required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea cols="10" rows="3" class="form-control" id="description" 
+            name="description" 
+            [(ngModel)]="product.description"
+                required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Product Price</label>
+            <input type="number" class="form-control" id="price" 
+            name="price" 
+            [(ngModel)]="product.price" 
+            required>
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="file" class="form-control" accept="image/*" id="image" 
+                name="image" style="display: none"
+                #productPhoto 
+                (change)="onFileSelected($event)" 
+                required>
+            &nbsp;<button (click)="productPhoto.click();" type="button">Select File</button>
+            <img [src]="product.imageUrl" height="200">
+            <input type="hidden" name="imageUrl" [(ngModel)]="product.imageUrl">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" [disabled]="!productForm.dirty || !productForm.valid" >{{ editMode ? 'Update' : 'Add' }}</button>
+        </div>
+    </form>
+</div>

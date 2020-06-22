@@ -1,0 +1,29 @@
+.ni {
+    display: inline-block;
+    font: normal normal normal 14px/1 NucleoIcons;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ni-email-83::before {
+    content: "\ea30";
+}
+
+.ni-lock-circle-open::before {
+    content: "\ea3e";
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: .375rem;
+    background-color: #fff;
+    background-clip: border-box
+}
+

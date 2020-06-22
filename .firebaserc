@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-microservices-estore": {
+      "hosting": {
+        "estore": [
+          "angular-microservices-estore"
+        ]
+      }
+    }
+  }
+}
