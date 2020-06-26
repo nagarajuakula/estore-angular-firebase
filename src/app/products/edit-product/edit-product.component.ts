@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../../shared/services/product.service';
 import { Product } from '../../shared/models/product.model';
@@ -19,8 +19,8 @@ export class EditProductComponent implements OnInit {
   images = [];
 
   constructor(public productService: ProductService,
-    private activatedRoute: ActivatedRoute,
-    ) { }
+              private activatedRoute: ActivatedRoute
+              ) { }
 
   ngOnInit(): void {
     const productId = this.activatedRoute.snapshot.params['id'];
@@ -28,7 +28,7 @@ export class EditProductComponent implements OnInit {
       this.editMode= true;
       this.product = this.productService.getProductById(productId);
     } else {
-      this.product = new Product();
+      this.product = new Product("", "", "", 0, "", "", "")
       const category = this.activatedRoute.snapshot.queryParams['category'];
       this.product.category = category;
     }

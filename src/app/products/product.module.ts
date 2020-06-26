@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductComponent } from './product.component';
@@ -28,7 +29,8 @@ import { SharedModule } from '../shared/shared.module';
     MatCardModule,
     MatSelectModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    Ng2SearchPipeModule
   ]
 })
 export class ProductsModule { }

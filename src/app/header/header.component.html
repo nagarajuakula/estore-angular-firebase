@@ -20,7 +20,8 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarTogglerDemo03">
         <form>
             <div class="input-group no-border">
-              <input class="form-control" type="text" name="search" autocomplete="off" placeholder="Search not yet implemented">
+              <input class="form-control" type="text" id="search" name="search" autocomplete="off" placeholder="Search..."
+              [(ngModel)]="productService.searchTerm">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <i class="nc-icon nc-zoom-split"></i>
@@ -29,27 +30,10 @@
             </div>
         </form>
         <ul class="navbar-nav mt-2 mt-lg-0 ">
-          <li class="nav-item" *ngIf="authService.isUserLoggedIn">
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Profile">
-              <mat-icon>account_circle</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                User Profile
-              </button>
-              <button mat-menu-item (click)="logout()">
-                Logout
-              </button>
-            </mat-menu>   
-          </li>
           <li class="nav-item active">
             <a class="nav-link"
              routerLink="/" routerLinkActive="active"
              *ngIf="!authService.isUserLoggedIn">Login<span class="sr-only">(current)</span></a>
-             <!-- <a class="nav-link"
-             (click)="logout()"
-             style="cursor: pointer;"
-             *ngIf="authService.isUserLoggedIn">Logout<span class="sr-only">(current)</span></a> -->
           </li>
           <li class="nav-item">
             <div>
@@ -63,9 +47,22 @@
             </i></a>
           </div>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="authService.isUserLoggedIn">
             <a class="nav-link"
              routerLink="/products/edit-product/new" routerLinkActive="active">Add Product</a>
+          </li>
+          <li class="nav-item" *ngIf="authService.isUserLoggedIn">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="User Profile">
+              <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                User Profile
+              </button>
+              <button mat-menu-item (click)="logout()">
+                Logout
+              </button>
+            </mat-menu>   
           </li>
         </ul>
       </div>

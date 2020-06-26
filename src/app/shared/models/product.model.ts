@@ -6,5 +6,5 @@ export class Product {
     imageUrl: string; 
     category: string; 
     author?: string
-    constructor() { }
+    constructor(id, title, description, price, imageUrl, category, author) { }
 }

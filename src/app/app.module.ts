@@ -8,11 +8,14 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { StoreModule } from '@ngrx/store';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component'; 
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './header/header.component';
+import * as fromAppReducer from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { HeaderComponent } from './header/header.component';
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    Ng2SearchPipeModule,
+    StoreModule.forRoot(fromAppReducer.appReducer)
   ],
   providers: [
   //   {

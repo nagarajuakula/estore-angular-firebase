@@ -4,6 +4,7 @@
             <h4 for="category_select">Category By:</h4>
             <mat-select class="form-control" name="category_select" disableRipple id="category_select"
                 [(ngModel)]="selectedCategory">
+                <mat-option value="All" selected>All</mat-option>
                 <mat-option *ngFor="let category of productService.categories" [value]="category">{{category}}
                 </mat-option>
             </mat-select>
@@ -16,7 +17,7 @@
         <div class="row row-cols-1 row-cols-md-4" *ngIf="!productService.isLoading">
 
             <div class="col mb-4"
-                *ngFor="let product of products | searchByCategory:selectedCategory"
+                *ngFor="let product of products | searchByCategory:selectedCategory | filter:productService.searchTerm"
                 style="cursor: pointer">
                 <mat-card>
                     <img mat-card-image [src]=" productService.sanitizeUrl(product.imageUrl) " width="200px"
@@ -33,7 +34,7 @@
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
                         </span>&nbsp;&nbsp;
-                        <span class="right">
+                        <span class="right" *ngIf="authService.isUserLoggedIn">
                             <a placement="top" mdbTooltip="Delete Product" container="body"
                                 (click)="deleteProduct(product.id)"><i class="fa fa-trash"></i></a>
                         </span>

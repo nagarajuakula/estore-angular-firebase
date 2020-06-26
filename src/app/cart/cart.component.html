@@ -33,12 +33,10 @@
 
               <!--Card content-->
               <mat-card-content>
-                <mat-card-title>
-                  <strong>
-                    <a [routerLink]="['/products/product-detail', i]">{{
+                <mat-card-title style="font-size: 12px">
+                    <a [routerLink]="['/products/product-detail', product.id]">{{
                       product.title
                     }}</a>
-                  </strong>
                 </mat-card-title>
 
                 <!--Card footer-->

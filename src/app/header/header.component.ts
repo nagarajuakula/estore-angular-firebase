@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
 
 import { CartService } from '../shared/services/cart.service';
 import { AuthService } from '../shared/services/auth.service';
@@ -21,5 +21,9 @@ export class HeaderComponent {
 
     logout() {
         this.authService.logout();
+    }
+
+    search(searchTerm: InputEvent) {
+        this.productService.searchTerm = searchTerm.data; 
     }
 }

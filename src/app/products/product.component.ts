@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
 
 import { ProductService } from '../shared/services/product.service';
 import { Product } from '../shared/models/product.model';
 import { CartService } from '../shared/services/cart.service';
 import { SnackbarComponent } from '../shared/components/snackbar/snackbar.component';
+import * as fromAppReducer from '../store/app.reducer';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-products',
@@ -24,18 +27,21 @@ export class ProductComponent implements OnInit {
 
   constructor(public productService: ProductService,
     private cartService: CartService,
+    public authService: AuthService,
     private router: Router,
     private activateRoute: ActivatedRoute,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private store: Store<fromAppReducer.AppState>) { }
 
   ngOnInit(): void {
     this.selectedCategory = this.productService.selectedCategory;
-    this.productService.getProducts().subscribe(res => {
-      this.products = res;
-    });
-    this.productService.products.subscribe(products => {
+    this.products$ = this.productService.getProducts();
+    this.products$.subscribe(products => {
       this.products = products;
-    });
+    })
+
+    this.store.select("productsList").
+      subscribe(data => this.products = data.products);
   }
 
   onProductSelected(productId: string) {
@@ -46,7 +52,7 @@ export class ProductComponent implements OnInit {
   addProductToCart(product: Product) {
     this.cartService.items.push(product);
     this._snackBar.openFromComponent(SnackbarComponent, {
-      data: {message: "Product added to the cart", icon: "check"},
+      data: { message: "Product added to the cart", icon: "check" },
       duration: 500,
     });
   }
@@ -57,9 +63,9 @@ export class ProductComponent implements OnInit {
 
   getProductsCount(): number {
     if (this.selectedCategory === 'All') {
-      return this.productService.productsList.length;
+      return this.products.length;
     } else {
-      return this.productService.productsList.
+      return this.products.
         filter(product => {
           return product.category === this.selectedCategory
         }).length;
