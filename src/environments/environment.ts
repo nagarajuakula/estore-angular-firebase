@@ -6,13 +6,13 @@ export const environment = {
   production: false,
   // Your web app's Firebase configuration
   firebaseConfig : {
-    apiKey: "AIzaSyCen9PAa29lF0IGTHE5sLRm91xMeEbAuVY",
-    authDomain: "angular-microservices-estore.firebaseapp.com",
+    apiKey: "YOUR-API-KEY",
+    authDomain: "YOUR-DOMAIN",
     databaseURL: "https://angular-microservices-estore.firebaseio.com",
     projectId: "angular-microservices-estore",
-    storageBucket: "angular-microservices-estore.appspot.com",
-    messagingSenderId: "224696308295",
-    appId: "1:224696308295:web:899a4c89b7d404b98e1762"
+    storageBucket: "YOUR-STORAGE-BUCKET",
+    messagingSenderId: "YOUR-SENDER-ID",
+    appId: "YOUR-API-ID"
   }
   
   };
