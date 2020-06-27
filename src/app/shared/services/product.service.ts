@@ -120,9 +120,10 @@ export class ProductService {
   deleteProduct(key: string) {
     const deleteProductUrl = this.firebaseUrl_PREFIX + this.SLASH + key + this.SUFFIX;
     this.http.delete(deleteProductUrl).subscribe(response => {
-      // this.productsList = this.productsList.filter(product => {
-      //   return product.id !== key;
-      // });
+      const product = this.productsList.find(product => {
+        return product.id == key;
+      });
+      this.deleteImageFromStorage(product.title);
       //this.products.next(this.productsList);
       this.store.dispatch(new productActions.DeleteProduct(key));
       this.router.navigate(["/products"]);
@@ -130,6 +131,14 @@ export class ProductService {
     });
   }
 
+  deleteImageFromStorage(title: string) {
+    const imagePath = `ProductImages/${title}`;
+    const imageRef = this.storage.ref(imagePath);
+    imageRef.delete().subscribe(
+      result => console.log(result),
+      error => console.log(error));
+  }
+  
   openSnackbar(message: string, icon: string) {
     this._snackBar.openFromComponent(SnackbarComponent, {
       data: {message: message, icon: icon},
