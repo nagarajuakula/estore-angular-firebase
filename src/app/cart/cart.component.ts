@@ -24,8 +24,11 @@ export class CartComponent implements OnInit {
   }
 
   removeCartProduct(index: number) {
-    this.cartService.items.splice(index, 1);
-    this.cartProducts  = this.cartService.items;
+	  this.cartProducts = this.cartProducts.filter((product, i) =>  {
+		return i!==index;
+		});
+     this.cartService.items.splice(index, 1);
+    // this.cartProducts  = this.cartService.items;
   }
 
 }
